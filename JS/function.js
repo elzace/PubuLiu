@@ -34,7 +34,10 @@ function waterfall(parent,box){
 	//设置main的宽度
 	oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto;'
 	var hArr=new Array();//存储每一列的高度
-
+//在拉宽浏览器的时候，某些已经使用了position定位的图片节点不能恢复到第一排，因为第一排不能有绝对定位的样式，所以在判断不是第一排加绝对定位之前要把第一排所有设置过的样式全部清零。不用oBoxs.length是因为全部重置可能会造成性能降低，只需要取一个较大的数字（超过第一排box数即可）
+	for(var i=0;i<20;i++){
+		oBoxs[i].style.position='';
+	    }
 	for(var i=0;i<oBoxs.length;i++){
 		if(i<cols){
 			hArr.push(oBoxs[i].offsetHeight);
